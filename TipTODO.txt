@@ -1,0 +1,68 @@
+================================================================================
+CONNECTWARE SOLUTION - TIPS & RECOMMENDED TODO ROADMAP
+================================================================================
+Generated on: October 10, 2026
+Website: https://connectware.in/
+
+Below is the actionable list of recommendations to optimize SEO, compliance,
+security, and performance for Connectware Solution.
+
+--------------------------------------------------------------------------------
+1. SEARCH CONSOLE & SITEMAP SUBMISSION
+--------------------------------------------------------------------------------
+- Submit the new sitemap (https://connectware.in/sitemap.xml) in:
+  * Google Search Console: https://search.google.com/search-console
+  * Bing Webmaster Tools: https://www.bing.com/webmasters
+- Request manual indexing for the homepage and Privacy Policy page.
+- Regularly check crawl reports and core web vitals.
+
+--------------------------------------------------------------------------------
+2. LEGAL & COMPLIANCE - TERMS OF SERVICE
+--------------------------------------------------------------------------------
+- Add a companion "terms-of-service.html" (Terms & Conditions) page covering:
+  * Intellectual property rights
+  * Client service scopes and payment terms
+  * Limitation of liability
+  * Governing law (Gujarat / India jurisdiction)
+- Link both Privacy Policy and Terms of Service in the footer.
+
+--------------------------------------------------------------------------------
+3. CONTACT FORM SECURITY & SPAM PROTECTION
+--------------------------------------------------------------------------------
+- Location: forms/contact.php
+- Implement spam prevention mechanisms:
+  * Google reCAPTCHA v3 or Cloudflare Turnstile (invisible verification).
+  * A hidden honeypot field (bots fill it out, humans don't).
+  * Basic rate limiting to prevent form flooding / email quota exhaustion.
+  * Consider authenticated SMTP (e.g., PHPMailer or SendGrid) instead of
+    PHP mail() to ensure reliable inbox delivery and avoid spam folders.
+
+--------------------------------------------------------------------------------
+4. GOOGLE TAG MANAGER (GTM) CONSENT MODE V2 INTEGRATION
+--------------------------------------------------------------------------------
+- Container ID: GTM-K7GTDFST
+- In Google Tag Manager:
+  * Enable "Consent Overview" under Container Settings.
+  * Configure tags (Google Analytics 4, AdSense, remarketing) to require
+    ad_storage, ad_user_data, ad_personalization, and analytics_storage.
+  * Listen for the custom event emitted by assets/js/cookie-consent.js:
+    'cookie_consent_update' to fire tracking tags once consent is granted.
+
+--------------------------------------------------------------------------------
+5. ASSET & PERFORMANCE OPTIMIZATION
+--------------------------------------------------------------------------------
+- Convert legacy JPG/PNG images in assets/img/ (such as hero-bg.jpg, about.jpg,
+  testimonials-bg.jpg) to WebP format to reduce page load time.
+- Add width and height attributes to image tags to prevent Cumulative Layout
+  Shift (CLS).
+- Leverage browser caching and Gzip/Brotli compression via .htaccess or Nginx.
+
+--------------------------------------------------------------------------------
+6. HTTP SECURITY HEADERS
+--------------------------------------------------------------------------------
+- Configure your web server (.htaccess / Nginx / Cloudflare) to return:
+  * Strict-Transport-Security (HSTS)
+  * X-Content-Type-Options: nosniff
+  * X-Frame-Options: SAMEORIGIN
+  * Referrer-Policy: strict-origin-when-cross-origin
+================================================================================

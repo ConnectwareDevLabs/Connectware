@@ -1,0 +1,35 @@
+name: Guard Dev Branch
+
+on:
+  delete:
+
+jobs:
+  restore-dev:
+    # Triggered if someone or an automated PR merge deletes the 'dev' branch
+    if: github.event.ref_type == 'branch' && github.event.ref == 'dev'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Auto-Restore Dev Branch
+        uses: actions/github-script@v7
+        with:
+          script: |
+            console.log("Deletion event detected for 'dev' branch. Restoring immediately from main...");
+            try {
+              const mainRef = await github.rest.git.getRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: 'heads/main'
+              });
+              await github.rest.git.createRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: 'refs/heads/dev',
+                sha: mainRef.data.object.sha
+              });
+              console.log("Successfully restored 'dev' branch to match 'main'!");
+            } catch (error) {
+              console.error("Error restoring 'dev' branch:", error);
+              throw error;
+            }

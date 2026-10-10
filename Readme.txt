@@ -1,1 +1,1 @@
-Connectware Solution PVT. LTD.
+Connectware Solution
