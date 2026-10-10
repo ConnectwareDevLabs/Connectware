@@ -1,0 +1,293 @@
+/* ===================================================
+ * Connectware Cookie Consent Popup Styles
+ * =================================================== */
+
+.cw-cookie-banner {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  right: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+  background: rgba(21, 21, 21, 0.98);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #e5e5e5;
+  border: 1px solid rgba(255, 196, 81, 0.35);
+  border-radius: 12px;
+  padding: 22px 26px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  z-index: 99999;
+  font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0;
+  transform: translateY(30px);
+  visibility: hidden;
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.cw-cookie-banner.show {
+  opacity: 1;
+  transform: translateY(0);
+  visibility: visible;
+}
+
+.cw-cookie-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cw-cookie-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.cw-cookie-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 17px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  font-family: "Raleway", sans-serif;
+}
+
+.cw-cookie-title i {
+  color: #ffc451;
+  font-size: 22px;
+}
+
+.cw-cookie-text {
+  margin: 0;
+  color: #cccccc;
+  font-size: 13.5px;
+}
+
+.cw-cookie-text a {
+  color: #ffc451;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.cw-cookie-text a:hover {
+  color: #ffe08a;
+  text-decoration: underline;
+}
+
+.cw-cookie-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.cw-cookie-btn {
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.cw-cookie-btn-accept {
+  background-color: #ffc451;
+  color: #151515;
+  border-color: #ffc451;
+}
+
+.cw-cookie-btn-accept:hover {
+  background-color: #ffcd6b;
+  border-color: #ffcd6b;
+  color: #151515;
+  box-shadow: 0 4px 12px rgba(255, 196, 81, 0.35);
+}
+
+.cw-cookie-btn-reject {
+  background-color: transparent;
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cw-cookie-btn-reject:hover {
+  background-color: rgba(255, 255, 255, 0.08);
+  border-color: #ffffff;
+  color: #ffffff;
+}
+
+.cw-cookie-btn-prefs {
+  background-color: transparent;
+  color: #c9c9c9;
+  border: none;
+  text-decoration: underline;
+  padding: 8px 12px;
+}
+
+.cw-cookie-btn-prefs:hover {
+  color: #ffc451;
+}
+
+/* Preferences Accordion / Modal inside banner */
+.cw-cookie-prefs-panel {
+  display: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding-top: 16px;
+  margin-top: 10px;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cw-cookie-prefs-panel.open {
+  display: flex;
+}
+
+.cw-cookie-category {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 12px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cw-cookie-category-info h5 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cw-cookie-badge {
+  font-size: 11px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(255, 196, 81, 0.15);
+  color: #ffc451;
+  font-weight: 500;
+}
+
+.cw-cookie-category-info p {
+  font-size: 12.5px;
+  color: #a0a0a0;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* Switch styling */
+.cw-switch {
+  position: relative;
+  display: inline-block;
+  width: 44px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.cw-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.cw-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #3e3e3e;
+  transition: 0.3s;
+  border-radius: 24px;
+}
+
+.cw-slider:before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.3s;
+  border-radius: 50%;
+}
+
+.cw-switch input:checked + .cw-slider {
+  background-color: #ffc451;
+}
+
+.cw-switch input:checked + .cw-slider:before {
+  transform: translateX(20px);
+  background-color: #151515;
+}
+
+.cw-switch input:disabled + .cw-slider {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Reopen Cookie Settings Trigger Button (Floating or inline) */
+.cw-cookie-settings-trigger {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9999;
+  background: rgba(21, 21, 21, 0.9);
+  color: #ffc451;
+  border: 1px solid rgba(255, 196, 81, 0.3);
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.25s ease;
+}
+
+.cw-cookie-settings-trigger:hover {
+  background: #ffc451;
+  color: #151515;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 576px) {
+  .cw-cookie-banner {
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    padding: 18px;
+  }
+  .cw-cookie-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .cw-cookie-btn {
+    width: 100%;
+  }
+  .cw-cookie-btn-prefs {
+    text-align: center;
+  }
+}

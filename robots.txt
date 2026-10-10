@@ -1,0 +1,9 @@
+# Robots.txt for Connectware Solution
+# Website: https://connectware.in/
+
+User-agent: *
+Allow: /
+Disallow: /forms/
+
+# Sitemap
+Sitemap: https://connectware.in/sitemap.xml
