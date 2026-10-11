@@ -1,6 +1,7 @@
 /**
  * Connectware Cookie Consent & Google Consent Mode Handler
  * Compliant with GDPR, CCPA, and DPDP Act.
+ * Optimized for Desktop, Tablet, and Mobile devices.
  */
 (function() {
   "use strict";
@@ -51,6 +52,10 @@
   }
 
   function createBannerHTML() {
+    if (document.getElementById("cwCookieBanner")) {
+      return document.getElementById("cwCookieBanner");
+    }
+
     const banner = document.createElement("div");
     banner.id = "cwCookieBanner";
     banner.className = "cw-cookie-banner";
@@ -66,7 +71,7 @@
           </h4>
         </div>
         <p class="cw-cookie-text">
-          We use cookies and similar technologies to enhance your browsing experience, analyze site traffic, and deliver relevant advertisements via Google AdSense. 
+          We use cookies to enhance your browsing experience, analyze site traffic, and deliver personalized content through Google AdSense. 
           You can accept all cookies, customize your choices, or opt out of non-essential cookies. Learn more in our 
           <a href="privacy-policy.html">Privacy Policy</a>.
         </p>
@@ -126,6 +131,7 @@
 
     document.body.appendChild(banner);
     bindBannerEvents(banner);
+    return banner;
   }
 
   function bindBannerEvents(banner) {
@@ -168,8 +174,8 @@
     btnSavePrefs.addEventListener("click", function() {
       const consent = {
         necessary: true,
-        analytics: prefAnalytics.checked,
-        marketing: prefMarketing.checked,
+        analytics: prefAnalytics ? prefAnalytics.checked : false,
+        marketing: prefMarketing ? prefMarketing.checked : false,
         timestamp: new Date().toISOString()
       };
       saveConsent(consent);
@@ -178,18 +184,19 @@
   }
 
   function showBanner(banner) {
+    if (!banner) return;
     banner.classList.add("show");
   }
 
   function hideBanner(banner) {
+    if (!banner) return;
     banner.classList.remove("show");
   }
 
   window.openCookiePreferences = function() {
     let banner = document.getElementById("cwCookieBanner");
     if (!banner) {
-      createBannerHTML();
-      banner = document.getElementById("cwCookieBanner");
+      banner = createBannerHTML();
     }
     const current = getConsent() || { analytics: true, marketing: true };
     const prefAnalytics = banner.querySelector("#cwPrefAnalytics");
@@ -207,24 +214,45 @@
     showBanner(banner);
   };
 
-  document.addEventListener("DOMContentLoaded", function() {
+  function init() {
+    // Check URL parameters for manual reset or opening (helpful for testing)
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get("cookies") === "reset") {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+      if (urlParams.has("cookie-settings") || urlParams.get("cookies") === "open") {
+        window.openCookiePreferences();
+        return;
+      }
+    } catch (e) {
+      // Ignore URL parsing errors
+    }
+
     const savedConsent = getConsent();
     if (!savedConsent) {
-      createBannerHTML();
-      const banner = document.getElementById("cwCookieBanner");
+      const banner = createBannerHTML();
       setTimeout(function() {
         showBanner(banner);
-      }, 700);
+      }, 300);
     } else {
       applyConsent(savedConsent);
     }
 
-    // Attach listeners to any elements with data-open-cookie-settings or id="openCookieSettings"
-    document.querySelectorAll('[data-open-cookie-settings], #openCookieSettings').forEach(function(el) {
-      el.addEventListener('click', function(e) {
+    // Document-level event delegation for opening cookie settings
+    document.addEventListener("click", function(e) {
+      const trigger = e.target.closest('[data-open-cookie-settings], #openCookieSettings');
+      if (trigger) {
         e.preventDefault();
         window.openCookiePreferences();
-      });
+      }
     });
-  });
+  }
+
+  // Safe execution regardless of whether DOMContentLoaded has already fired
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+  } else {
+    init();
+  }
 })();

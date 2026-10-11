@@ -1,30 +1,42 @@
 /* ===================================================
  * Connectware Cookie Consent Popup Styles
+ * Fully Responsive for Desktop, Tablet, and Mobile
  * =================================================== */
+
+/* Universal Box-Sizing for Cookie Banner Elements */
+.cw-cookie-banner,
+.cw-cookie-banner * {
+  box-sizing: border-box;
+}
 
 .cw-cookie-banner {
   position: fixed;
   bottom: 24px;
-  left: 24px;
-  right: 24px;
+  left: 20px;
+  right: 20px;
   max-width: 860px;
   margin: 0 auto;
   background: rgba(21, 21, 21, 0.98);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: #e5e5e5;
-  border: 1px solid rgba(255, 196, 81, 0.35);
+  border: 1px solid rgba(255, 196, 81, 0.4);
   border-radius: 12px;
   padding: 22px 26px;
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
-  z-index: 99999;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.75);
+  z-index: 2147483647; /* Highest priority z-index so nothing obscures it */
   font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   font-size: 14px;
   line-height: 1.6;
   opacity: 0;
-  transform: translateY(30px);
+  transform: translateY(20px);
   visibility: hidden;
   transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  max-height: 90vh;
+  max-height: 90dvh;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 
 .cw-cookie-banner.show {
@@ -36,7 +48,7 @@
 .cw-cookie-content {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 14px;
 }
 
 .cw-cookie-header {
@@ -60,12 +72,14 @@
 .cw-cookie-title i {
   color: #ffc451;
   font-size: 22px;
+  flex-shrink: 0;
 }
 
 .cw-cookie-text {
   margin: 0;
   color: #cccccc;
   font-size: 13.5px;
+  line-height: 1.55;
 }
 
 .cw-cookie-text a {
@@ -89,7 +103,7 @@
 }
 
 .cw-cookie-btn {
-  padding: 8px 18px;
+  padding: 9px 18px;
   font-size: 13px;
   font-weight: 600;
   border-radius: 6px;
@@ -103,6 +117,8 @@
   align-items: center;
   justify-content: center;
   gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 .cw-cookie-btn-accept {
@@ -111,7 +127,8 @@
   border-color: #ffc451;
 }
 
-.cw-cookie-btn-accept:hover {
+.cw-cookie-btn-accept:hover,
+.cw-cookie-btn-accept:focus {
   background-color: #ffcd6b;
   border-color: #ffcd6b;
   color: #151515;
@@ -121,11 +138,12 @@
 .cw-cookie-btn-reject {
   background-color: transparent;
   color: #ffffff;
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
-.cw-cookie-btn-reject:hover {
-  background-color: rgba(255, 255, 255, 0.08);
+.cw-cookie-btn-reject:hover,
+.cw-cookie-btn-reject:focus {
+  background-color: rgba(255, 255, 255, 0.1);
   border-color: #ffffff;
   color: #ffffff;
 }
@@ -138,7 +156,8 @@
   padding: 8px 12px;
 }
 
-.cw-cookie-btn-prefs:hover {
+.cw-cookie-btn-prefs:hover,
+.cw-cookie-btn-prefs:focus {
   color: #ffc451;
 }
 
@@ -146,10 +165,10 @@
 .cw-cookie-prefs-panel {
   display: none;
   border-top: 1px solid rgba(255, 255, 255, 0.12);
-  padding-top: 16px;
-  margin-top: 10px;
+  padding-top: 14px;
+  margin-top: 6px;
   flex-direction: column;
-  gap: 12px;
+  gap: 10px;
 }
 
 .cw-cookie-prefs-panel.open {
@@ -157,23 +176,24 @@
 }
 
 .cw-cookie-category {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
   padding: 12px 14px;
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
 }
 
 .cw-cookie-category-info h5 {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: #ffffff;
   margin: 0 0 4px 0;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
@@ -187,8 +207,8 @@
 }
 
 .cw-cookie-category-info p {
-  font-size: 12.5px;
-  color: #a0a0a0;
+  font-size: 12px;
+  color: #a8a8a8;
   margin: 0;
   line-height: 1.45;
 }
@@ -200,6 +220,7 @@
   width: 44px;
   height: 24px;
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .cw-switch input {
@@ -246,48 +267,94 @@
   cursor: not-allowed;
 }
 
-/* Reopen Cookie Settings Trigger Button (Floating or inline) */
-.cw-cookie-settings-trigger {
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 9999;
-  background: rgba(21, 21, 21, 0.9);
-  color: #ffc451;
-  border: 1px solid rgba(255, 196, 81, 0.3);
-  padding: 8px 12px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: all 0.25s ease;
-}
-
-.cw-cookie-settings-trigger:hover {
-  background: #ffc451;
-  color: #151515;
-  transform: translateY(-2px);
-}
-
-@media (max-width: 576px) {
+/* ===================================================
+ * Mobile & Small Screen Adaptations (≤ 768px)
+ * =================================================== */
+@media (max-width: 768px) {
   .cw-cookie-banner {
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-    padding: 18px;
+    bottom: max(12px, env(safe-area-inset-bottom, 12px));
+    left: 10px;
+    right: 10px;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 16px 14px;
+    border-radius: 10px;
+    max-height: 85vh;
+    max-height: 85dvh;
+    overflow-y: auto;
   }
+
+  .cw-cookie-header {
+    gap: 8px;
+  }
+
+  .cw-cookie-title {
+    font-size: 15px;
+  }
+
+  .cw-cookie-title i {
+    font-size: 19px;
+  }
+
+  .cw-cookie-text {
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
   .cw-cookie-actions {
+    display: flex;
     flex-direction: column;
     align-items: stretch;
+    gap: 8px;
+    margin-top: 4px;
   }
+
   .cw-cookie-btn {
     width: 100%;
+    padding: 11px 16px;
+    font-size: 13.5px;
+    min-height: 44px; /* Optimal touch target */
   }
+
   .cw-cookie-btn-prefs {
     text-align: center;
+    padding: 8px 12px;
+  }
+
+  .cw-cookie-category {
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .cw-cookie-category-info h5 {
+    font-size: 13px;
+  }
+
+  .cw-cookie-category-info p {
+    font-size: 11.5px;
+  }
+}
+
+/* Very Small Mobile Screens (≤ 380px) */
+@media (max-width: 380px) {
+  .cw-cookie-banner {
+    left: 6px;
+    right: 6px;
+    bottom: max(8px, env(safe-area-inset-bottom, 8px));
+    padding: 14px 10px;
+  }
+
+  .cw-cookie-title {
+    font-size: 14px;
+  }
+
+  .cw-cookie-text {
+    font-size: 12px;
+  }
+
+  .cw-cookie-btn {
+    padding: 10px 12px;
+    font-size: 13px;
   }
 }
