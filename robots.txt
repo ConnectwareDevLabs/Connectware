@@ -4,6 +4,7 @@
 User-agent: *
 Allow: /
 Disallow: /forms/
+Disallow: /api/
 
 # Sitemap
 Sitemap: https://connectware.in/sitemap.xml

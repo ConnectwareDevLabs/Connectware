@@ -54,7 +54,9 @@
       if( response.ok ) {
         return response.text();
       } else {
-        throw new Error(`${response.status} ${response.statusText} ${response.url}`); 
+        return response.text().then(text => {
+          throw new Error(text || `${response.status} ${response.statusText}`);
+        });
       }
     })
     .then(data => {

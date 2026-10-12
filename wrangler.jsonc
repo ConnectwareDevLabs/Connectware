@@ -1,6 +1,7 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "connectware",
+  "main": "src/worker.js",
   "compatibility_date": "2026-05-30",
   "observability": {
     "enabled": true
@@ -10,5 +11,11 @@
   },
   "compatibility_flags": [
     "nodejs_compat"
+  ],
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "destination_address": "contactus@connectware.in"
+    }
   ]
 }
