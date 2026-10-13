@@ -526,33 +526,35 @@
           </div>
           <div class="col-lg-8 mt-5 mt-lg-0">
 
-            <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+            <form action="/api/contact" method="post" role="form" class="php-email-form">
+              <!-- Honeypot field for bot protection -->
+              <input type="text" name="_gotcha" style="display:none !important;" tabindex="-1" autocomplete="off">
+
               <div class="row">
                 <div class="col-md-6 form-group">
                   <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="text" class="form-control" name="company" id="company" placeholder="Company Name"
-                    required>
+                  <input type="text" class="form-control" name="company" id="company" placeholder="Company Name">
                 </div>
               </div>
-              <div class="row">
+              <div class="row mt-3">
                 <div class="col-md-6 form-group">
                   <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
                 </div>
                 <div class="col-md-6 form-group mt-3 mt-md-0">
-                  <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" maxlength="10"
+                  <input type="text" class="form-control" name="phone" id="phone" placeholder="Phone" maxlength="15"
                     required>
                 </div>
-
               </div>
               <div class="form-group mt-3">
-                <!-- <input type="text" class="form-control" name="service" id="service" placeholder="Service" required> -->
-                <select name="Service" id="service" class="form-control" placeholder="Services" required>
+                <select name="Service" id="service" class="form-control" required>
+                  <option value="" disabled selected>Select a Service</option>
+                  <option value="Industry 4.0 & Digital Manufacturing">Industry 4.0 &amp; Digital Manufacturing</option>
+                  <option value="Digital Transformation Consulting">Digital Transformation Consulting</option>
                   <option value="Web Development">Web Development</option>
                   <option value="App Development">App Development</option>
-                  <option value="Digital Marketing">Digital Marketing</option>
-                  <option value="SEO">SEO</option>
+                  <option value="Digital Marketing & SEO">Digital Marketing &amp; SEO</option>
                 </select>
               </div>
               <div class="form-group mt-3">
@@ -560,7 +562,7 @@
               </div>
               <div class="my-3">
                 <div class="loading">Loading</div>
-                <!-- <div class="error-message"></div> -->
+                <div class="error-message"></div>
                 <div class="sent-message">Your message has been sent. Thank you!</div>
               </div>
               <div class="text-center"><button type="submit">Send Message</button></div>

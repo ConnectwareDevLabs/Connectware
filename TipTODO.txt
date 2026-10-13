@@ -27,15 +27,21 @@ security, and performance for Connectware Solution.
 - Link both Privacy Policy and Terms of Service in the footer.
 
 --------------------------------------------------------------------------------
-3. CONTACT FORM SECURITY & SPAM PROTECTION
+3. CLOUDFLARE NATIVE CONTACT FORM & EMAIL ROUTING
 --------------------------------------------------------------------------------
-- Location: forms/contact.php
-- Implement spam prevention mechanisms:
-  * Google reCAPTCHA v3 or Cloudflare Turnstile (invisible verification).
-  * A hidden honeypot field (bots fill it out, humans don't).
-  * Basic rate limiting to prevent form flooding / email quota exhaustion.
-  * Consider authenticated SMTP (e.g., PHPMailer or SendGrid) instead of
-    PHP mail() to ensure reliable inbox delivery and avoid spam folders.
+- Handler: src/worker.js & functions/api/contact.js (/api/contact)
+- Uses Cloudflare Workers Native Email Routing (`env.EMAIL.send()`).
+- Cloudflare Dashboard Configuration Steps:
+  1. Go to Dash > connectware.in > Email > Email Routing:
+     * Enable Email Routing for the domain.
+     * Under "Destination addresses", ensure "contactus@connectware.in" is
+       verified.
+  2. Under Workers & Pages > connectware > Settings > Bindings:
+     * Ensure an "Email Routing" binding named "EMAIL" is connected
+       (configured automatically via wrangler.jsonc "send_email").
+- Security & spam protection included:
+  * Built-in honeypot trap (_gotcha field) to block automated bot spam.
+  * Server-side email format and required fields validation.
 
 --------------------------------------------------------------------------------
 4. GOOGLE TAG MANAGER (GTM) CONSENT MODE V2 INTEGRATION
